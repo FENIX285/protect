@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redirection</title>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const path = window.location.pathname.substring(1);
+      fetch(`https://script.google.com/macros/s/AKfycbwOsCi0ENmPhrl7IzwzcCNMye0RG41HZcBjFlI2-ZRi0bTGYAXKhMjT0Ot7JJoH-LY8sw/exec?id=${path}`)
+        .then(response => response.json())
+        .then(data => {
+          if (data.url) {
+            window.location.href = data.url;
+          } else {
+            document.body.innerHTML = 'Link not found';
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+          document.body.innerHTML = 'Error processing request';
+        });
+    });
+  </script>
+</head>
+<body>
+</body>
+</html>
